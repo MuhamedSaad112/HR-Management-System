@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -19,43 +17,76 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class JobServiceImpl implements JobService {
 
-	private final JobRepo jobRepo;
+	private final JobRepo jobRepo; // Injecting the JobRepo for database operations
 
+	/**
+	 * Saves the given job to the database.
+	 *
+	 * @param job The job entity to save
+	 * @return The saved job entity
+	 */
 	@Override
 	public Job save(Job job) {
-		log.debug("Request to save job}", job);
-
-		return jobRepo.save(job);
+		log.debug("Request to save job : {}", job); // Logging the save request
+		return jobRepo.save(job); // Saving the job entity
 	}
 
+	/**
+	 * Updates the given job in the database.
+	 *
+	 * @param job The job entity to update
+	 * @return The updated job entity
+	 */
 	@Override
 	public Job update(Job job) {
-		log.debug("Request to update job}", job);
-		return jobRepo.save(job);
+		log.debug("Request to update job : {}", job); // Logging the update request
+		return jobRepo.save(job); // Saving the updated job entity
 	}
 
+	/**
+	 * Retrieves all jobs with pagination and sorting.
+	 *
+	 * @param pageable Pagination and sorting information (page, size, sort)
+	 * @return A paginated list of jobs
+	 */
 	@Override
 	public Page<Job> findAll(Pageable pageable) {
-		log.debug("Request to Get list of jobs");
-		return jobRepo.findAll(pageable);
+		log.debug("Request to get list of jobs"); // Logging the request to fetch all jobs
+		return jobRepo.findAll(pageable); // Returning the paginated list of jobs
 	}
 
+	/**
+	 * Retrieves a job by its ID.
+	 *
+	 * @param id The ID of the job
+	 * @return The job with the given ID, or null if not found
+	 */
 	@Override
 	public Job findById(Long id) {
-		log.debug("Request to get job}", id);
-		return jobRepo.findById(id).orElse(null);
+		log.debug("Request to get job : {}", id); // Logging the request for a job with the given ID
+		return jobRepo.findById(id).orElse(null); // Returning the job with the given ID, or null if not found
 	}
 
+	/**
+	 * Retrieves a reference to a job by its ID using a cache for better performance.
+	 *
+	 * @param id The ID of the job
+	 * @return An Optional containing the job reference, or empty if not found
+	 */
 	@Override
 	public Optional<Job> getById(Long id) {
-		log.debug("Request to Get Job from cash: {}", id);
-		return Optional.of(jobRepo.getReferenceById(id));
+		log.debug("Request to Get Job from cache : {}", id); // Logging the cache retrieval request
+		return Optional.of(jobRepo.getReferenceById(id)); // Returning the job reference
 	}
 
+	/**
+	 * Deletes a job by its ID.
+	 *
+	 * @param id The ID of the job to delete
+	 */
 	@Override
 	public void delete(Long id) {
-		log.debug("Request to delete job}", id);
-		jobRepo.deleteById(id);
+		log.debug("Request to delete job : {}", id); // Logging the delete request
+		jobRepo.deleteById(id); // Deleting the job by its ID
 	}
-
 }

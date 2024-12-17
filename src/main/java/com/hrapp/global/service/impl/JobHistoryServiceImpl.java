@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -19,44 +17,76 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class JobHistoryServiceImpl implements JobHistoryService {
 
-	private final JobHistoryRepo historyRepo;
+	private final JobHistoryRepo historyRepo; // Injecting the JobHistoryRepo for database operations
 
+	/**
+	 * Saves the given job history to the database.
+	 *
+	 * @param jobHistory The job history entity to save
+	 * @return The saved job history entity
+	 */
 	@Override
 	public JobHistory save(JobHistory jobHistory) {
-		log.debug("Request to save jobHistory}", jobHistory);
-		return historyRepo.save(jobHistory);
-
+		log.debug("Request to save jobHistory : {}", jobHistory); // Logging the save request
+		return historyRepo.save(jobHistory); // Saving the job history entity
 	}
 
+	/**
+	 * Updates the given job history in the database.
+	 *
+	 * @param jobHistory The job history entity to update
+	 * @return The updated job history entity
+	 */
 	@Override
 	public JobHistory update(JobHistory jobHistory) {
-		log.debug("Request to update jobHistory}", jobHistory);
-		return historyRepo.save(jobHistory);
+		log.debug("Request to update jobHistory : {}", jobHistory); // Logging the update request
+		return historyRepo.save(jobHistory); // Saving the updated job history entity
 	}
 
+	/**
+	 * Retrieves all job histories with pagination and sorting.
+	 *
+	 * @param pageable Pagination and sorting information (page, size, sort)
+	 * @return A paginated list of job histories
+	 */
 	@Override
 	public Page<JobHistory> findAll(Pageable pageable) {
-		log.debug("Request to Get all jobHistories");
-		return historyRepo.findAll(pageable);
+		log.debug("Request to Get all jobHistories"); // Logging the request to fetch all job histories
+		return historyRepo.findAll(pageable); // Returning the paginated list of job histories
 	}
 
+	/**
+	 * Retrieves a job history by its ID.
+	 *
+	 * @param id The ID of the job history
+	 * @return The job history with the given ID, or null if not found
+	 */
 	@Override
 	public JobHistory findById(Long id) {
-		log.debug("Request to Get jobHistory}", id);
-		return historyRepo.findById(id).orElse(null);
+		log.debug("Request to Get jobHistory : {}", id); // Logging the request for a job history with the given ID
+		return historyRepo.findById(id).orElse(null); // Returning the job history with the given ID, or null if not found
 	}
 
+	/**
+	 * Retrieves a reference to a job history by its ID using a cache for better performance.
+	 *
+	 * @param id The ID of the job history
+	 * @return An Optional containing the job history reference, or empty if not found
+	 */
 	@Override
 	public Optional<JobHistory> getById(Long id) {
-		log.debug("Request to Get JobHistory from cash: {}", id);
-		return Optional.of(historyRepo.getReferenceById(id));
+		log.debug("Request to Get JobHistory from cache: {}", id); // Logging the cache retrieval request
+		return Optional.of(historyRepo.getReferenceById(id)); // Returning the job history reference
 	}
 
+	/**
+	 * Deletes a job history by its ID.
+	 *
+	 * @param id The ID of the job history to delete
+	 */
 	@Override
 	public void delete(Long id) {
-		log.debug("Request to delete jobHistory}", id);
-		historyRepo.deleteById(id);
-
+		log.debug("Request to delete jobHistory : {}", id); // Logging the delete request
+		historyRepo.deleteById(id); // Deleting the job history by its ID
 	}
-
 }

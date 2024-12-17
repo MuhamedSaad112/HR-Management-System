@@ -6,29 +6,55 @@ import com.hrapp.global.entity.Job;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-
+/**
+ * Service Interface for managing {@link Job} entities.
+ */
 public interface JobService {
 
-	// Save a Job.
-
+	/**
+	 * Save a job entity to the database.
+	 *
+	 * @param job the entity to save.
+	 * @return the persisted {@link Job} entity.
+	 */
 	Job save(Job job);
 
-	// updates a Job.
-
+	/**
+	 * Update an existing job entity.
+	 *
+	 * @param job the entity containing updated fields.
+	 * @return the updated {@link Job} entity.
+	 */
 	Job update(Job job);
 
-	// Get all the Job.
-
+	/**
+	 * Retrieve all job entities with pagination support.
+	 *
+	 * @param pageable pagination information.
+	 * @return a paginated list of {@link Job} entities.
+	 */
 	Page<Job> findAll(Pageable pageable);
 
-	// Get the "id" Job
-
+	/**
+	 * Retrieve a job entity by its unique identifier.
+	 *
+	 * @param id the ID of the job to retrieve.
+	 * @return the {@link Job} entity, or {@code null} if not found.
+	 */
 	Job findById(Long id);
 
-	// Get the "id" Job from cash
-	public Optional<Job> getById(Long id);
+	/**
+	 * Retrieve a job entity by its unique identifier, possibly using caching.
+	 *
+	 * @param id the ID of the job to retrieve.
+	 * @return an {@link Optional} containing the job entity if found, or empty otherwise.
+	 */
+	Optional<Job> getById(Long id);
 
-	// Delete the "id" Job.
-
+	/**
+	 * Delete a job entity by its unique identifier.
+	 *
+	 * @param id the ID of the job to delete.
+	 */
 	void delete(Long id);
 }

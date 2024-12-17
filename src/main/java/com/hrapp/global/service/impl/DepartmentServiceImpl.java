@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
@@ -19,43 +17,76 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class DepartmentServiceImpl implements DepartmentService {
 
-	private final DepartmentRepo departmentRepo;
+	private final DepartmentRepo departmentRepo; // Injecting the DepartmentRepo for database operations
 
+	/**
+	 * Saves the given department to the database.
+	 *
+	 * @param department The department entity to save
+	 * @return The saved department entity
+	 */
 	@Override
 	public Department save(Department department) {
-		log.debug("Request to save department : {}", department);
-		return departmentRepo.save(department);
+		log.debug("Request to save department : {}", department); // Logging the save request
+		return departmentRepo.save(department); // Saving the department entity
 	}
 
+	/**
+	 * Updates the given department in the database.
+	 *
+	 * @param department The department entity to update
+	 * @return The updated department entity
+	 */
 	@Override
 	public Department update(Department department) {
-		log.debug("Request to update department :{}", department);
-		return departmentRepo.save(department);
+		log.debug("Request to update department : {}", department); // Logging the update request
+		return departmentRepo.save(department); // Saving the updated department entity
 	}
 
+	/**
+	 * Retrieves all departments with pagination support.
+	 *
+	 * @param pageable Pagination information (page, size, sort)
+	 * @return A paginated list of departments
+	 */
 	@Override
 	public Page<Department> findAll(Pageable pageable) {
-		log.debug("Request to Get all departments");
-		return departmentRepo.findAll(pageable);
+		log.debug("Request to get all departments"); // Logging the find all request
+		return departmentRepo.findAll(pageable); // Returning the paginated list of departments
 	}
 
+	/**
+	 * Retrieves a department by its ID.
+	 *
+	 * @param id The ID of the department
+	 * @return The department with the given ID, or null if not found
+	 */
 	@Override
 	public Department findById(Long id) {
-		log.debug("Request to Get department}", id);
-		return departmentRepo.findById(id).orElse(null);
+		log.debug("Request to get department : {}", id); // Logging the find by ID request
+		return departmentRepo.findById(id).orElse(null); // Returning the department or null if not found
 	}
 
+	/**
+	 * Retrieves a department by its ID using a reference for better performance.
+	 *
+	 * @param id The ID of the department
+	 * @return An Optional containing the department, or empty if not found
+	 */
 	@Override
 	public Optional<Department> getById(Long id) {
-		log.debug("Request to Get Employee  from cash : {}", id);
-		return Optional.of(departmentRepo.getReferenceById(id));
+		log.debug("Request to Get department from cache : {}", id); // Logging the cache retrieval request
+		return Optional.of(departmentRepo.getReferenceById(id)); // Returning a reference of the department
 	}
 
+	/**
+	 * Deletes a department by its ID.
+	 *
+	 * @param id The ID of the department to delete
+	 */
 	@Override
 	public void delete(Long id) {
-		log.debug("Request to delete department}", id);
-		departmentRepo.deleteById(id);
-
+		log.debug("Request to delete department : {}", id); // Logging the delete request
+		departmentRepo.deleteById(id); // Deleting the department by its ID
 	}
-
 }
