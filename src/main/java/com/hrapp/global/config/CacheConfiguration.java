@@ -1,12 +1,5 @@
 package com.hrapp.global.config;
 
-import java.net.URI;
-import java.util.concurrent.TimeUnit;
-
-import javax.cache.configuration.MutableConfiguration;
-import javax.cache.expiry.CreatedExpiryPolicy;
-import javax.cache.expiry.Duration;
-
 import org.hibernate.cache.jcache.ConfigSettings;
 import org.redisson.Redisson;
 import org.redisson.config.ClusterServersConfig;
@@ -24,9 +17,14 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.cache.PrefixedKeyGenerator;
+
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableCaching

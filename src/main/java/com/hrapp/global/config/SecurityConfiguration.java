@@ -1,12 +1,11 @@
 
 package com.hrapp.global.config;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 import com.hrapp.global.security.AuthoritiesConstants;
 import com.hrapp.global.security.jwt.JWTConfigurer;
 import com.hrapp.global.security.jwt.JWTFilter;
 import com.hrapp.global.security.jwt.TokenProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -21,9 +20,7 @@ import org.springframework.security.web.access.CompositeAccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint;
 
-
-
-import lombok.RequiredArgsConstructor;
+import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)

@@ -1,15 +1,14 @@
 package com.hrapp.global.config;
 
-import lombok.extern.log4j.Log4j2;
 import com.hrapp.global.entity.Authority;
 import com.hrapp.global.entity.User;
 import com.hrapp.global.repository.AuthorityRepo;
 import com.hrapp.global.repository.UserRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-
 
 import java.util.Set;
 

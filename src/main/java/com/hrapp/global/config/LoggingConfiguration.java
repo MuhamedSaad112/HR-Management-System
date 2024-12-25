@@ -1,16 +1,13 @@
 package com.hrapp.global.config;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import ch.qos.logback.classic.LoggerContext;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import ch.qos.logback.classic.LoggerContext;
+import java.util.HashMap;
+import java.util.Map;
 
 @Configuration
 public class LoggingConfiguration {
