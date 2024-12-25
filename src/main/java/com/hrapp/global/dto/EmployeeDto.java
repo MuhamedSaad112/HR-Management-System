@@ -1,8 +1,5 @@
 package com.hrapp.global.dto;
 
-import java.time.Instant;
-import java.time.LocalDate;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -11,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.Instant;
 
 @Setter
 @Getter

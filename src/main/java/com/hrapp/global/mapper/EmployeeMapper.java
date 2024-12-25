@@ -1,13 +1,13 @@
 package com.hrapp.global.mapper;
 
-import java.util.List;
-
 import com.hrapp.global.dto.EmployeeDto;
 import com.hrapp.global.entity.Employee;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 @Mapper
 public interface EmployeeMapper {

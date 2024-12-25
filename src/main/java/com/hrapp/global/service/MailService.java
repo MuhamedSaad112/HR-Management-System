@@ -1,9 +1,9 @@
 package com.hrapp.global.service;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
-
 import com.hrapp.global.entity.User;
+import jakarta.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,9 +13,8 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 
-import jakarta.mail.internet.MimeMessage;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
 
 /**
  * Service class for handling email-related operations, such as sending

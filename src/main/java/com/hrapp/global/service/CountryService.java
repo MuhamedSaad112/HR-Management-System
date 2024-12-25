@@ -1,10 +1,9 @@
 package com.hrapp.global.service;
 
-import java.util.Optional;
-
 import com.hrapp.global.entity.Country;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link Country} entities.
@@ -25,15 +24,15 @@ public interface CountryService {
 	 * @param country the entity containing updated fields.
 	 * @return the updated {@link Country} entity.
 	 */
-	Country update(Country country);
+	Optional<Country> update(Country country);
 
 	/**
 	 * Retrieve all country entities with pagination support.
 	 *
-	 * @param pageable pagination information.
+	 *
 	 * @return a paginated list of {@link Country} entities.
 	 */
-	Page<Country> findAll(Pageable pageable);
+	List<Country> findAll();
 
 	/**
 	 * Retrieve a country entity by its unique identifier.

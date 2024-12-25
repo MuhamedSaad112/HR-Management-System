@@ -1,11 +1,11 @@
 package com.hrapp.global.mapper;
 
-import java.util.List;
-
 import com.hrapp.global.dto.DepartmentDto;
 import com.hrapp.global.entity.Department;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 @Mapper
 public interface DepartmentMapper {

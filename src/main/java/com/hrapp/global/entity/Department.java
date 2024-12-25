@@ -1,27 +1,17 @@
 package com.hrapp.global.entity;
 
-import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "department")

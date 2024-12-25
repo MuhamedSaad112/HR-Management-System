@@ -1,11 +1,11 @@
 package com.hrapp.global.mapper;
 
-import java.util.List;
-
 import com.hrapp.global.dto.TaskDto;
 import com.hrapp.global.entity.Task;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 
 @Mapper

@@ -1,10 +1,10 @@
 package com.hrapp.global.service;
 
-import java.util.Optional;
-
 import com.hrapp.global.entity.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link Employee} entities.
@@ -34,7 +34,7 @@ public interface EmployeeService {
 	 * @param employee the entity containing updated fields.
 	 * @return the updated {@link Employee} entity.
 	 */
-	Employee update(Employee employee);
+	Optional<Employee> update(Employee employee);
 
 	/**
 	 * Retrieve all employee entities with pagination support.

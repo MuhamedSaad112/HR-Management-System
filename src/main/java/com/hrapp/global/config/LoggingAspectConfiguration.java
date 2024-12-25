@@ -12,14 +12,9 @@ import org.springframework.core.env.Environment;
 @EnableAspectJAutoProxy
 public class LoggingAspectConfiguration {
 
-	/**
-	 * تفعيل LoggingAspect في بيئة التطوير فقط
-	 * 
-	 * @param env البيئة
-	 * @return LoggingAspect
-	 */
+
 	@Bean
-	@Profile("dev") // تفعيل في بيئة dev فقط
+	@Profile("dev")
 	public LoggingAspect loggingAspect(Environment env) {
 		return new LoggingAspect(env);
 	}

@@ -1,10 +1,9 @@
 package com.hrapp.global.service;
 
-import java.util.Optional;
-
 import com.hrapp.global.entity.Department;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link Department} entities.
@@ -25,15 +24,14 @@ public interface DepartmentService {
 	 * @param department the entity containing updated fields.
 	 * @return the updated {@link Department} entity.
 	 */
-	Department update(Department department);
+	Optional<Department> update(Department department);
 
 	/**
 	 * Retrieve all department entities with pagination support.
 	 *
-	 * @param pageable pagination information.
 	 * @return a paginated list of {@link Department} entities.
 	 */
-	Page<Department> findAll(Pageable pageable);
+	List<Department> findAll();
 
 	/**
 	 * Retrieve a department entity by its unique identifier.

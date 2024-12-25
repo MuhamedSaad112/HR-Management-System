@@ -1,11 +1,11 @@
 package com.hrapp.global.mapper;
 
-import java.util.List;
-
 import com.hrapp.global.dto.LocationDto;
 import com.hrapp.global.entity.Location;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
+
+import java.util.List;
 
 
 @Mapper

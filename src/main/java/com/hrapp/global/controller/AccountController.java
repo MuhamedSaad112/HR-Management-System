@@ -1,28 +1,27 @@
 package com.hrapp.global.controller;
 
-import java.util.Optional;
-
-import com.hrapp.global.repository.UserRepository;
-import com.hrapp.global.service.MailService;
-import com.hrapp.global.service.UserService;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
 import com.hrapp.global.controller.VM.KeyAndPasswordVM;
 import com.hrapp.global.controller.VM.ManagedUserVM;
 import com.hrapp.global.controller.errors.EmailAlreadyUsedException;
 import com.hrapp.global.controller.errors.InvalidPasswordException;
 import com.hrapp.global.controller.errors.LoginAlreadyUsedException;
-import com.hrapp.global.dto.AdminUserDTO;
-import com.hrapp.global.dto.PasswordChangeDTO;
+import com.hrapp.global.dto.AdminUserDto;
+import com.hrapp.global.dto.PasswordChangeDto;
 import com.hrapp.global.entity.User;
+import com.hrapp.global.repository.UserRepository;
 import com.hrapp.global.security.SecurityUtils;
-
+import com.hrapp.global.service.MailService;
+import com.hrapp.global.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * REST controller for managing the current user's account.
@@ -107,8 +106,8 @@ public class AccountController {
 	 *                          couldn't be returned.
 	 */
 	@GetMapping("/account")
-	public AdminUserDTO getAccount() {
-		return userService.getUserWithAuthorities().map(AdminUserDTO::new)
+	public AdminUserDto getAccount() {
+		return userService.getUserWithAuthorities().map(AdminUserDto::new)
 				.orElseThrow(() -> new AccountControllerException("User could not be found"));
 	}
 
@@ -122,7 +121,7 @@ public class AccountController {
 	 *                                   user login wasn't found.
 	 */
 	@PostMapping("/account")
-		public void updateAccount(@Valid @RequestBody AdminUserDTO userDTO) {
+		public void updateAccount(@Valid @RequestBody AdminUserDto userDTO) {
 		String userLogin = SecurityUtils
 				.getCurrentUserLogin()
 				.orElseThrow(() -> new AccountControllerException("Current user login not found"));
@@ -151,7 +150,7 @@ public class AccountController {
 	 *                                  password is incorrect.
 	 */
 	@PostMapping(path = "/account/change-password")
-	public void changePassword(@RequestBody PasswordChangeDTO passwordChangeDto) {
+	public void changePassword(@Valid @RequestBody PasswordChangeDto passwordChangeDto) {
 		if (isPasswordLengthInvalid(passwordChangeDto.getNewPassword())) {
 			throw new InvalidPasswordException();
 		}
@@ -165,7 +164,7 @@ public class AccountController {
 	 * @param mail the mail of the user.
 	 */
 	@PostMapping(path = "/account/reset-password/init")
-	public void requestPasswordReset(@RequestBody String mail) {
+	public void requestPasswordReset(@Email @RequestBody String mail) {
 		log.debug("Requesting password reset for email: {}", mail);
 		Optional<User> user = userService.requestPasswordReset(mail);
 		if (user.isPresent()) {
@@ -189,7 +188,7 @@ public class AccountController {
 	 *                                  password could not be reset.
 	 */
 	@PostMapping(path = "/account/reset-password/finish")
-	public void finishPasswordReset(@RequestBody KeyAndPasswordVM keyAndPassword) {
+	public void finishPasswordReset(@Valid @RequestBody KeyAndPasswordVM keyAndPassword) {
 		if (isPasswordLengthInvalid(keyAndPassword.getNewPassword())) {
 			throw new InvalidPasswordException();
 		}

@@ -31,13 +31,10 @@
 
         <!-- Framework Versions -->
         <springdoc.version>2.3.0</springdoc.version>
-        <jhipster.version>7.9.3</jhipster.version>
-
-        <!-- Library Versions -->
         <commons-lang3.version>3.14.0</commons-lang3.version>
         <jwt.version>0.11.5</jwt.version>
-        <zalando-problem.version>0.27.1</zalando-problem.version>
-        <redisson.version>3.24.3</redisson.version>
+        <zalando-problem.version>0.27.0</zalando-problem.version>
+        <redisson.version>3.39.0</redisson.version>
         <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
     </properties>
 
@@ -81,7 +78,7 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- Jakarta Servlet API (replacing old javax.servlet) -->
+        <!-- Jakarta Servlet API -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -95,14 +92,12 @@
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${springdoc.version}</version>
             <exclusions>
-                <!-- Exclude conflicting dependencies -->
                 <exclusion>
                     <groupId>io.swagger.core.v3</groupId>
                     <artifactId>swagger-annotations</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Add compatible Swagger Annotations -->
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
@@ -170,6 +165,11 @@
             <artifactId>problem-spring-web</artifactId>
             <version>0.28.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>jackson-datatype-problem</artifactId>
+            <version>${zalando-problem.version}</version>
+        </dependency>
 
         <!-- Caching -->
         <dependency>
@@ -178,9 +178,9 @@
             <version>${redisson.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-jcache</artifactId>
-            <version>5.6.15.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- JHipster Framework -->
@@ -197,9 +197,38 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>3.39.0</version>
+            <groupId>org.zalando</groupId>
+            <artifactId>jackson-datatype-problem</artifactId>
+            <version>0.27.0</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>7.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate5</artifactId>
+            <version>2.15.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+            <version>2.15.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.15.3</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
+            <version>2.2</version>
         </dependency>
     </dependencies>
 

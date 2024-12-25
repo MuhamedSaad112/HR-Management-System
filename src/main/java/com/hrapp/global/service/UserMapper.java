@@ -1,14 +1,7 @@
 package com.hrapp.global.service;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import com.hrapp.global.dto.AdminUserDTO;
-import com.hrapp.global.dto.UserDTO;
+import com.hrapp.global.dto.AdminUserDto;
+import com.hrapp.global.dto.UserDto;
 import com.hrapp.global.entity.Authority;
 import com.hrapp.global.entity.User;
 import org.mapstruct.BeanMapping;
@@ -16,69 +9,72 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 import org.springframework.stereotype.Service;
 
+import java.util.*;
+import java.util.stream.Collectors;
+
 /**
- * Service class for mapping between {@link User} and {@link UserDTO} or {@link AdminUserDTO}.
+ * Service class for mapping between {@link User} and {@link UserDto} or {@link AdminUserDto}.
  */
 @Service
 public class UserMapper {
 
 	/**
-	 * Converts a list of {@link User} entities to a list of {@link UserDTO} objects.
+	 * Converts a list of {@link User} entities to a list of {@link UserDto} objects.
 	 *
 	 * @param users the list of {@link User} entities to convert.
-	 * @return a list of {@link UserDTO} objects.
+	 * @return a list of {@link UserDto} objects.
 	 */
-	public List<UserDTO> usersToUserDTOs(List<User> users) {
+	public List<UserDto> usersToUserDTOs(List<User> users) {
 		return users.stream().filter(Objects::nonNull).map(this::userToUserDTO).collect(Collectors.toList());
 	}
 
 	/**
-	 * Converts a {@link User} entity to a {@link UserDTO} object.
+	 * Converts a {@link User} entity to a {@link UserDto} object.
 	 *
 	 * @param user the {@link User} entity to convert.
-	 * @return the corresponding {@link UserDTO} object.
+	 * @return the corresponding {@link UserDto} object.
 	 */
-	public UserDTO userToUserDTO(User user) {
-		return new UserDTO(user);
+	public UserDto userToUserDTO(User user) {
+		return new UserDto(user);
 	}
 
 	/**
-	 * Converts a list of {@link User} entities to a list of {@link AdminUserDTO} objects.
+	 * Converts a list of {@link User} entities to a list of {@link AdminUserDto} objects.
 	 *
 	 * @param users the list of {@link User} entities to convert.
-	 * @return a list of {@link AdminUserDTO} objects.
+	 * @return a list of {@link AdminUserDto} objects.
 	 */
-	public List<AdminUserDTO> usersToAdminUserDTOs(List<User> users) {
+	public List<AdminUserDto> usersToAdminUserDTOs(List<User> users) {
 		return users.stream().filter(Objects::nonNull).map(this::userToAdminUserDTO).collect(Collectors.toList());
 	}
 
 	/**
-	 * Converts a {@link User} entity to a {@link AdminUserDTO} object.
+	 * Converts a {@link User} entity to a {@link AdminUserDto} object.
 	 *
 	 * @param user the {@link User} entity to convert.
-	 * @return the corresponding {@link AdminUserDTO} object.
+	 * @return the corresponding {@link AdminUserDto} object.
 	 */
-	public AdminUserDTO userToAdminUserDTO(User user) {
-		return new AdminUserDTO(user);
+	public AdminUserDto userToAdminUserDTO(User user) {
+		return new AdminUserDto(user);
 	}
 
 	/**
-	 * Converts a list of {@link AdminUserDTO} objects to a list of {@link User} entities.
+	 * Converts a list of {@link AdminUserDto} objects to a list of {@link User} entities.
 	 *
-	 * @param userDTOs the list of {@link AdminUserDTO} objects to convert.
+	 * @param userDTOs the list of {@link AdminUserDto} objects to convert.
 	 * @return a list of {@link User} entities.
 	 */
-	public List<User> userDTOsToUsers(List<AdminUserDTO> userDTOs) {
+	public List<User> userDTOsToUsers(List<AdminUserDto> userDTOs) {
 		return userDTOs.stream().filter(Objects::nonNull).map(this::userDTOToUser).collect(Collectors.toList());
 	}
 
 	/**
-	 * Converts an {@link AdminUserDTO} object to a {@link User} entity.
+	 * Converts an {@link AdminUserDto} object to a {@link User} entity.
 	 *
-	 * @param userDTO the {@link AdminUserDTO} object to convert.
+	 * @param userDTO the {@link AdminUserDto} object to convert.
 	 * @return the corresponding {@link User} entity.
 	 */
-	public User userDTOToUser(AdminUserDTO userDTO) {
+	public User userDTOToUser(AdminUserDto userDTO) {
 		if (userDTO == null) {
 			return null;
 		} else {
@@ -132,38 +128,38 @@ public class UserMapper {
 	}
 
 	/**
-	 * Converts a {@link User} entity to a {@link UserDTO} object with only the ID.
+	 * Converts a {@link User} entity to a {@link UserDto} object with only the ID.
 	 *
 	 * @param user the {@link User} entity to convert.
-	 * @return the corresponding {@link UserDTO} object containing only the ID.
+	 * @return the corresponding {@link UserDto} object containing only the ID.
 	 */
 	@Named("id")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(target = "id", source = "id")
-	public UserDTO toDtoId(User user) {
+	public UserDto toDtoId(User user) {
 		if (user == null) {
 			return null;
 		}
-		UserDTO userDto = new UserDTO();
+		UserDto userDto = new UserDto();
 		userDto.setId(user.getId());
 		return userDto;
 	}
 
 	/**
-	 * Converts a set of {@link User} entities to a set of {@link UserDTO} objects containing only the ID.
+	 * Converts a set of {@link User} entities to a set of {@link UserDto} objects containing only the ID.
 	 *
 	 * @param users the set of {@link User} entities to convert.
-	 * @return a set of {@link UserDTO} objects containing only the ID.
+	 * @return a set of {@link UserDto} objects containing only the ID.
 	 */
 	@Named("idSet")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(target = "id", source = "id")
-	public Set<UserDTO> toDtoIdSet(Set<User> users) {
+	public Set<UserDto> toDtoIdSet(Set<User> users) {
 		if (users == null) {
 			return Collections.emptySet();
 		}
 
-		Set<UserDTO> userSet = new HashSet<>();
+		Set<UserDto> userSet = new HashSet<>();
 		for (User userEntity : users) {
 			userSet.add(this.toDtoId(userEntity));
 		}
@@ -172,41 +168,41 @@ public class UserMapper {
 	}
 
 	/**
-	 * Converts a {@link User} entity to a {@link UserDTO} object containing both the ID and login.
+	 * Converts a {@link User} entity to a {@link UserDto} object containing both the ID and login.
 	 *
 	 * @param user the {@link User} entity to convert.
-	 * @return the corresponding {@link UserDTO} object containing ID and login.
+	 * @return the corresponding {@link UserDto} object containing ID and login.
 	 */
 	@Named("login")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(target = "id", source = "id")
 	@Mapping(target = "login", source = "login")
-	public UserDTO toDtoLogin(User user) {
+	public UserDto toDtoLogin(User user) {
 		if (user == null) {
 			return null;
 		}
-		UserDTO userDto = new UserDTO();
+		UserDto userDto = new UserDto();
 		userDto.setId(user.getId());
 		userDto.setLogin(user.getLogin());
 		return userDto;
 	}
 
 	/**
-	 * Converts a set of {@link User} entities to a set of {@link UserDTO} objects containing both the ID and login.
+	 * Converts a set of {@link User} entities to a set of {@link UserDto} objects containing both the ID and login.
 	 *
 	 * @param users the set of {@link User} entities to convert.
-	 * @return a set of {@link UserDTO} objects containing ID and login.
+	 * @return a set of {@link UserDto} objects containing ID and login.
 	 */
 	@Named("loginSet")
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(target = "id", source = "id")
 	@Mapping(target = "login", source = "login")
-	public Set<UserDTO> toDtoLoginSet(Set<User> users) {
+	public Set<UserDto> toDtoLoginSet(Set<User> users) {
 		if (users == null) {
 			return Collections.emptySet();
 		}
 
-		Set<UserDTO> userSet = new HashSet<>();
+		Set<UserDto> userSet = new HashSet<>();
 		for (User userEntity : users) {
 			userSet.add(this.toDtoLogin(userEntity));
 		}

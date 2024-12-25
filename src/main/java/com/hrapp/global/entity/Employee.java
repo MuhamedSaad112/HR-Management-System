@@ -1,31 +1,21 @@
 package com.hrapp.global.entity;
 
-import java.io.Serializable;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.io.Serializable;
+import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Employee")

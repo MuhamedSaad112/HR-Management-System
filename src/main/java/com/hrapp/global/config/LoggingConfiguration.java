@@ -24,11 +24,5 @@ public class LoggingConfiguration {
 		map.put("app_port", serverPort);
 		String customFields = mapper.writeValueAsString(map);
 
-		// هنا يمكن إضافة أي من appenders المعتادة مثل ConsoleAppender أو
-		// LogstashAppender
-		// تعتمد على استخدامك للـ JSON Format و Logstash
-		// إذا كنت تحتاج إلى تطبيق Logstash أو تنسيق JSON بدون JHipster، يمكن إضافة
-		// appender وفقًا لذلك
-		// مثل إضافة LogstashAppender أو ConsoleAppender هنا.
 	}
 }

@@ -1,10 +1,7 @@
 package com.hrapp.global.dto;
 
-import java.time.Instant;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-
+import com.hrapp.global.config.Constants;
+import com.hrapp.global.entity.Authority;
 import com.hrapp.global.entity.User;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -13,8 +10,10 @@ import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.hrapp.global.config.Constants;
-import com.hrapp.global.entity.Authority;
+
+import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A DTO representing a user, with his authorities.
@@ -22,7 +21,7 @@ import com.hrapp.global.entity.Authority;
 @NoArgsConstructor
 @Getter
 @Setter
-public class AdminUserDTO {
+public class AdminUserDto {
 
 	private Long id;
 
@@ -59,7 +58,7 @@ public class AdminUserDTO {
 
 	private Set<String> authorities;
 
-	public AdminUserDTO(User user) {
+	public AdminUserDto(User user) {
 		this.id = user.getId();
 		this.login = user.getLogin();
 		this.firstName = user.getFirstName();

@@ -1,7 +1,7 @@
 package com.hrapp.global.controller.VM;
 
 
-import com.hrapp.global.dto.AdminUserDTO;
+import com.hrapp.global.dto.AdminUserDto;
 import jakarta.validation.constraints.Size;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
  * management UI.
  */
 @NoArgsConstructor // Empty constructor needed for Jackson.
-public class ManagedUserVM extends AdminUserDTO {
+public class ManagedUserVM extends AdminUserDto {
 
 	public static final int PASSWORD_MIN_LENGTH = 4;
 

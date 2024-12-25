@@ -1,19 +1,8 @@
 package com.hrapp.global.service;
 
-import java.security.SecureRandom;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Base64;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.hrapp.global.config.Constants;
-import com.hrapp.global.dto.AdminUserDTO;
-import com.hrapp.global.dto.UserDTO;
+import com.hrapp.global.dto.AdminUserDto;
+import com.hrapp.global.dto.UserDto;
 import com.hrapp.global.entity.Authority;
 import com.hrapp.global.entity.User;
 import com.hrapp.global.exception.EmailAlreadyUsedException;
@@ -23,8 +12,8 @@ import com.hrapp.global.repository.AuthorityRepo;
 import com.hrapp.global.repository.UserRepository;
 import com.hrapp.global.security.AuthoritiesConstants;
 import com.hrapp.global.security.SecurityUtils;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,9 +22,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import java.security.SecureRandom;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service class for managing users.
@@ -93,7 +84,7 @@ public class UserService {
 	}
 	
 //Account
-	public User registerUser(AdminUserDTO userDTO, String password) {
+	public User registerUser(AdminUserDto userDTO, String password) {
 		userRepository.findOneByLogin(userDTO.getLogin().toLowerCase()).ifPresent(existingUser -> {
 			boolean removed = removeNonActivatedUser(existingUser);
 			if (!removed) {
@@ -150,7 +141,7 @@ public class UserService {
 	}
 
 	//Admin
-	public User createUser(AdminUserDTO userDTO) {
+	public User createUser(AdminUserDto userDTO) {
 		User user = new User();
 		user.setLogin(userDTO.getLogin().toLowerCase());
 		user.setFirstName(userDTO.getFirstName());
@@ -188,7 +179,7 @@ public class UserService {
 	 * @return updated user.
 	 */
 	//Admin
-	public Optional<AdminUserDTO> updateUser(AdminUserDTO userDTO) {
+	public Optional<AdminUserDto> updateUser(AdminUserDto userDTO) {
 		return Optional.of(userRepository.findById(userDTO.getId())).filter(Optional::isPresent).map(Optional::get)
 				.map(user -> {
 					this.clearUserCaches(user);
@@ -208,7 +199,7 @@ public class UserService {
 					this.clearUserCaches(user);
 					log.debug("Changed Information for User: {}", user);
 					return user;
-				}).map(AdminUserDTO::new);
+				}).map(AdminUserDto::new);
 	}
 
 	//Admin
@@ -265,14 +256,14 @@ public class UserService {
 
 	//Admin
 	@Transactional(readOnly = true)
-	public Page<AdminUserDTO> getAllManagedUsers(Pageable pageable) {
-		return userRepository.findAll(pageable).map(AdminUserDTO::new);
+	public Page<AdminUserDto> getAllManagedUsers(Pageable pageable) {
+		return userRepository.findAll(pageable).map(AdminUserDto::new);
 	}
 
 	//Admin
 	@Transactional(readOnly = true)
-	public Page<UserDTO> getAllPublicUsers(Pageable pageable) {
-		return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(UserDTO::new);
+	public Page<UserDto> getAllPublicUsers(Pageable pageable) {
+		return userRepository.findAllByIdNotNullAndActivatedIsTrue(pageable).map(UserDto::new);
 	}
 
 	//Admin

@@ -1,10 +1,10 @@
 package com.hrapp.global.service;
 
-import java.util.Optional;
-
 import com.hrapp.global.entity.Job;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link Job} entities.
@@ -25,7 +25,7 @@ public interface JobService {
 	 * @param job the entity containing updated fields.
 	 * @return the updated {@link Job} entity.
 	 */
-	Job update(Job job);
+	Optional<Job> update(Job job);
 
 	/**
 	 * Retrieve all job entities with pagination support.

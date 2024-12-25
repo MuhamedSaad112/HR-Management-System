@@ -2,10 +2,12 @@ package com.hrapp.global.controller.errors;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Getter
 public class FieldErrorVM implements Serializable {
 

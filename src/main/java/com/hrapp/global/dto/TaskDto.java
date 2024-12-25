@@ -1,16 +1,15 @@
 package com.hrapp.global.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
-
+import com.hrapp.global.entity.Job;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.hrapp.global.entity.Job;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Setter
 @Getter

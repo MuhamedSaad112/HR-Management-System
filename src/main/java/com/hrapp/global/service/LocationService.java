@@ -1,10 +1,9 @@
 package com.hrapp.global.service;
 
-import java.util.Optional;
-
 import com.hrapp.global.entity.Location;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link Location} entities.
@@ -25,15 +24,15 @@ public interface LocationService {
 	 * @param location the entity containing updated fields.
 	 * @return the updated {@link Location} entity.
 	 */
-	Location update(Location location);
+	Optional<Location> update(Location location);
 
 	/**
 	 * Retrieve all location entities with pagination support.
 	 *
-	 * @param pageable pagination information.
+
 	 * @return a paginated list of {@link Location} entities.
 	 */
-	Page<Location> findAll(Pageable pageable);
+	List<Location> findAll();
 
 	/**
 	 * Retrieve a location entity by its unique identifier.

@@ -1,18 +1,15 @@
 package com.hrapp.global.repository;
 
+import com.hrapp.global.entity.Job;
+import jakarta.persistence.EntityManager;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-
-import com.hrapp.global.entity.Job;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-
-
-import jakarta.persistence.EntityManager;
 
 
 /**

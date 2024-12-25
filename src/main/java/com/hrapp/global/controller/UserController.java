@@ -1,13 +1,20 @@
 package com.hrapp.global.controller;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-
+import com.hrapp.global.config.Constants;
+import com.hrapp.global.controller.errors.BadRequestAlertException;
+import com.hrapp.global.controller.errors.EmailAlreadyUsedException;
+import com.hrapp.global.controller.errors.LoginAlreadyUsedException;
+import com.hrapp.global.dto.AdminUserDto;
+import com.hrapp.global.entity.User;
 import com.hrapp.global.exception.ResourceNotFoundException;
+import com.hrapp.global.repository.UserRepository;
+import com.hrapp.global.security.AuthoritiesConstants;
+import com.hrapp.global.service.MailService;
+import com.hrapp.global.service.UserService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,34 +23,18 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.hrapp.global.config.Constants;
-import com.hrapp.global.controller.errors.BadRequestAlertException;
-import com.hrapp.global.controller.errors.EmailAlreadyUsedException;
-import com.hrapp.global.controller.errors.LoginAlreadyUsedException;
-import com.hrapp.global.dto.AdminUserDTO;
-import com.hrapp.global.entity.User;
-import com.hrapp.global.repository.UserRepository;
-import com.hrapp.global.security.AuthoritiesConstants;
-import com.hrapp.global.service.MailService;
-import com.hrapp.global.service.UserService;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * REST controller for managing users. Another option would be to have a
@@ -85,7 +76,7 @@ public class UserController {
 
 	@PostMapping("/users")
 	@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-	public ResponseEntity<User> createUser(@Valid @RequestBody AdminUserDTO userDTO) throws URISyntaxException {
+	public ResponseEntity<User> createUser(@Valid @RequestBody AdminUserDto userDTO) throws URISyntaxException {
 		log.debug("REST request to save User : {}", userDTO);
 
 		if (userDTO.getId() != null) {
@@ -117,7 +108,7 @@ public class UserController {
 	 */
 	@PutMapping("/users")
 	@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-	public ResponseEntity<AdminUserDTO> updateUser(@Valid @RequestBody AdminUserDTO userDTO) {
+	public ResponseEntity<AdminUserDto> updateUser(@Valid @RequestBody AdminUserDto userDTO) {
 		log.debug("REST request to update User : {}", userDTO);
 		Optional<User> existingUser = userRepository.findOneByEmailIgnoreCase(userDTO.getEmail());
 		if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
@@ -127,7 +118,7 @@ public class UserController {
 		if (existingUser.isPresent() && (!existingUser.get().getId().equals(userDTO.getId()))) {
 			throw new LoginAlreadyUsedException();
 		}
-		Optional<AdminUserDTO> updatedUser = userService.updateUser(userDTO);
+		Optional<AdminUserDto> updatedUser = userService.updateUser(userDTO);
 
 		return ResponseUtil.wrapOrNotFound(updatedUser,
 				HeaderUtil.createAlert(applicationName, "userManagement.updated", userDTO.getLogin()));
@@ -144,13 +135,13 @@ public class UserController {
 	 */
 	@GetMapping("/users")
 	@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-	public ResponseEntity<List<AdminUserDTO>> getAllUsers(Pageable pageable) {
+	public ResponseEntity<List<AdminUserDto>> getAllUsers(Pageable pageable) {
 		log.debug("REST request to get all User for an admin");
 		if (!onlyContainsAllowedProperties(pageable)) {
 			return ResponseEntity.badRequest().build();
 		}
 
-		final Page<AdminUserDTO> page = userService.getAllManagedUsers(pageable);
+		final Page<AdminUserDto> page = userService.getAllManagedUsers(pageable);
 		HttpHeaders headers = PaginationUtil
 				.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
 		return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
@@ -169,13 +160,13 @@ public class UserController {
 	 */
 	@GetMapping("/users/{login}")
 	@PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
-	public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
+	public ResponseEntity<AdminUserDto> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
 		log.debug("REST request to get User : {}", login);
 
 		Optional<User> user = userService.getUserWithAuthoritiesByLogin(login);
 
 		if (user.isPresent()) {
-			AdminUserDTO userDTO = new AdminUserDTO(user.get());
+			AdminUserDto userDTO = new AdminUserDto(user.get());
 			return ResponseEntity.ok(userDTO);
 		} else {
 

@@ -1,12 +1,12 @@
 package com.hrapp.global.dto;
 
 
+import com.hrapp.global.entity.Country;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import com.hrapp.global.entity.Country;
 
 @Setter
 @Getter

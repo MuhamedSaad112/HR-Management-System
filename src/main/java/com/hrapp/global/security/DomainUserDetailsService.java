@@ -1,13 +1,11 @@
 package com.hrapp.global.security;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
-
-import com.hrapp.global.exception.UserNotActivatedException;
-import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import com.hrapp.global.entity.User;
+import com.hrapp.global.exception.UserNotActivatedException;
 import com.hrapp.global.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +14,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-
-import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * Authenticate a user from the database.

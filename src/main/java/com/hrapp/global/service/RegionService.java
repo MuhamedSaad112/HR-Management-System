@@ -1,10 +1,9 @@
 package com.hrapp.global.service;
 
-import java.util.Optional;
-
 import com.hrapp.global.entity.Region;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service Interface for managing {@link Region} entities.
@@ -25,15 +24,14 @@ public interface RegionService {
 	 * @param region the entity containing updated fields.
 	 * @return the updated {@link Region} entity.
 	 */
-	Region update(Region region);
+	Optional<Region> update(Region region);
 
 	/**
 	 * Retrieve all region entities with pagination support.
 	 *
-	 * @param pageable pagination information.
 	 * @return a paginated list of {@link Region} entities.
 	 */
-	Page<Region> findAll(Pageable pageable);
+	List<Region> findAll();
 
 	/**
 	 * Retrieve a region entity by its unique identifier.
