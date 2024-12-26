@@ -20,10 +20,10 @@ public class JobHistoryDto {
 
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	private Instant startDate;
 
-	@NotEmpty
+	@NotNull
 	private Instant endDate;
 
 	@NotNull

@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -32,7 +32,7 @@ public class EmployeeDto {
 
 	private String empPhoneNumber;
 
-	private Instant empHireDate;
+	private LocalDate empHireDate;
 
 	@Max(150000)
 	@Min(12000)

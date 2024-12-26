@@ -35,7 +35,7 @@ public class Task implements Serializable {
 	@Column(name = "title")
 	private String title;
 
-	@NotNull
+
 	@Column(name = "description")
 	private String description;
 

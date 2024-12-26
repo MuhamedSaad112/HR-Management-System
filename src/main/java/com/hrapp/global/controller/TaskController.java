@@ -58,9 +58,6 @@ public class TaskController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Task Title is required");
 		}
 
-		if (dto.getDescription() == null || dto.getDescription().isEmpty()) {
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Task Description is required");
-		}
 
 		if (dto.getJobs() == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Task Jobs is required");

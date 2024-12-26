@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class LocationDto {
 
-	@NotNull
+
 	private Long id;
 
 	@NotNull

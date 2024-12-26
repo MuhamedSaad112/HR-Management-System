@@ -1,7 +1,6 @@
 package com.hrapp.global.dto;
 
 import com.hrapp.global.entity.Job;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,10 +18,10 @@ public class TaskDto {
 
 	private Long id;
 
-	@NotEmpty
+	@NotNull
 	private String title;
 
-	@NotEmpty
+
 	private String description;
 
 	@NotNull

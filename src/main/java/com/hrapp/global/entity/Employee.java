@@ -1,5 +1,6 @@
 package com.hrapp.global.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
@@ -14,6 +15,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,7 +52,7 @@ public class Employee implements Serializable {
 	private String phoneNumber;
 
 	@Column(name = "hire_date")
-	private Instant hireDate;
+	private LocalDate hireDate;
 
 	@Column(name = "salary")
 	@Max(150000)

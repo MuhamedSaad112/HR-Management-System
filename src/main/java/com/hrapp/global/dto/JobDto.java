@@ -20,19 +20,19 @@ public class JobDto {
 
     private Long id;
 
-    @NotEmpty
+    @NotNull
     private String jobTitle;
 
-    @NotEmpty
+    @NotNull
     private Long minSalary;
 
-    @NotEmpty
+    @NotNull
     private Long maxSalary;
 
     @NotNull
     private Employee employee;
 
-    @NotNull
+
     private Set<Task> tasks = new HashSet<>();
 
 }

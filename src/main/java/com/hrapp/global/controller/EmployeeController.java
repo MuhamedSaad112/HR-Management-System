@@ -1,6 +1,7 @@
 package com.hrapp.global.controller;
 
 import com.hrapp.global.controller.errors.BadRequestAlertException;
+import com.hrapp.global.controller.errors.EmailAlreadyUsedException;
 import com.hrapp.global.dto.EmployeeDto;
 import com.hrapp.global.entity.Employee;
 import com.hrapp.global.mapper.EmployeeMapper;
@@ -78,8 +79,10 @@ public class EmployeeController {
         if (dto.getEmpId() != null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "A new employee cannot already have an ID");
         }
-
-
+        Optional<Employee> employee =  employeeRepo.findByEmail(dto.getEmpEmail());
+        if (employee.isPresent()) {
+            throw new EmailAlreadyUsedException();
+        }
         Employee emp = employeeMapper.unMap(dto);
         Employee entity = employeeService.save(emp);
         EmployeeDto returnDto = employeeMapper.map(entity);

@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${user.langKey}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="#{email.activation.title}">Activate Your Account</title>
     <style>
-        /* Reset and base styles */
+        /* Reset Styles */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -13,92 +13,98 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
-            line-height: 1.6;
-            color: #333;
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            color: #333;
+            line-height: 1.6;
         }
 
-        .email-container {
-            max-width: 600px;
-            margin: 30px auto;
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: 1px solid #e0e0e0;
-        }
-
-        .email-header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-
-        .email-content {
-            padding: 30px;
-        }
-
-        /* RTL Support */
+        /* RTL and LTR Support */
         .rtl {
             direction: rtl;
             text-align: right;
         }
 
-        h1 {
-            color: #333;
+        .ltr {
+            direction: ltr;
+            text-align: left;
+        }
+
+        /* Email Container */
+        .email-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Header Section */
+        .email-header {
+            background: linear-gradient(90deg, #4CAF50, #087F23);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .email-header h1 {
             font-size: 24px;
+            margin: 0;
+        }
+
+        /* Content Section */
+        .email-content {
+            padding: 20px 30px;
+        }
+
+        .email-content p {
             margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        p {
             color: #555;
-            margin-bottom: 20px;
         }
 
-        .btn {
+        .email-content .btn {
             display: inline-block;
-            padding: 12px 24px;
-            background-color: #4CAF50;
+            padding: 12px 20px;
+            background: #4CAF50;
             color: white;
             text-decoration: none;
-            border-radius: 6px;
             font-weight: bold;
+            border-radius: 6px;
+            transition: 0.3s;
             text-align: center;
-            transition: background-color 0.3s ease;
-            margin: 20px 0;
         }
 
-        .btn:hover {
-            background-color: #45a049;
-        }
-
-        .btn-purple {
-            background-color: #800080;
-        }
-
-        .btn-purple:hover {
-            background-color: #5A005A;
-        }
-
-        .email-footer {
-            background-color: #f9f9f9;
-            color: #777;
-            text-align: center;
-            padding: 15px;
-            font-size: 12px;
-            border-top: 1px solid #e0e0e0;
+        .email-content .btn:hover {
+            background: #087F23;
         }
 
         .developer-info {
-            margin-top: 20px;
             text-align: center;
-            color: #666;
-            font-size: 14px;
+            margin-top: 20px;
+        }
+
+        .developer-info a {
+            text-decoration: none;
+            color: white;
+            background: #800080;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .developer-info a:hover {
+            background: #5A005A;
+        }
+
+        .email-footer {
+            background: #f9f9f9;
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #777;
+            border-top: 1px solid #e0e0e0;
         }
 
         .signature {
@@ -107,46 +113,52 @@
             margin-top: 20px;
         }
 
-        /* Responsive adjustments */
         @media screen and (max-width: 600px) {
             .email-container {
-                margin: 0;
-                width: 100%;
-                border-radius: 0;
+                margin: 10px;
+            }
+
+            .email-content {
+                padding: 15px;
+            }
+
+            .email-header h1 {
+                font-size: 20px;
             }
         }
     </style>
 </head>
-<body>
-    <div class="email-container" th:classappend="${user.langKey == 'ar' ? 'rtl' : ''}">
-        <div class="email-header">
-            <h1 th:text="#{email.activation.title}">Activate Your Account</h1>
-        </div>
-        
-        <div class="email-content">
-            <p th:text="#{email.activation.greeting(${user.login})}">Dear User,</p>
-
-            <p th:text="#{email.activation.text1}">Thank you for registering. To activate your account, please click the button below:</p>
-
-            <div style="text-align: center;">
-                <a th:href="${link}" class="btn" th:text="#{email.activation.link}">Activate Your Account</a>
-            </div>
-
-            <p th:text="#{email.activation.text2}">If you did not register for this account, please ignore this email.</p>
-
-            <p th:text="#{email.activation.text3}">Regards,</p>
-
-            <p class="signature" th:text="#{email.signature}">The Spring Security Team</p>
-
-            <div class="developer-info">
-                <p>Developed by <strong>Engineer Mohamed Saad</strong></p>
-                <a href="https://github.com/MuhamedSaad112" class="btn btn-purple" target="_blank">Visit my GitHub</a>
-            </div>
-        </div>
-
-        <footer class="email-footer">
-            &copy; 2024 Spring Security App. All rights reserved.
-        </footer>
+<body th:class="${user.langKey == 'ar' ? 'rtl' : 'ltr'}">
+<div class="email-container">
+    <!-- Header Section -->
+    <div class="email-header">
+        <h1 th:text="#{email.activation.title}">Activate Your Account</h1>
     </div>
+
+    <!-- Content Section -->
+    <div class="email-content">
+        <p th:text="#{email.activation.greeting(${user.login})}">Dear User,</p>
+        <p th:text="#{email.activation.text1}">Thank you for registering. To activate your account, please click the
+            button below:</p>
+        <div style="text-align: center;">
+            <a th:href="${link}" class="btn" th:text="#{email.activation.link}">Activate Your Account</a>
+        </div>
+        <p th:text="#{email.activation.text2}">If you did not register for this account, please ignore this email.</p>
+        <p th:text="#{email.activation.text3}">Regards,</p>
+        <p class="signature" th:text="#{email.signature}">The HR Management System Team</p>
+
+        <!-- Developer Info -->
+        <div class="developer-info">
+            <p th:text="#{email.developer.info}">Developed by Engineer Mohamed Saad</p>
+            <a href="https://github.com/MuhamedSaad112" target="_blank" th:text="#{email.developer.github}">Visit My
+                GitHub</a>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="email-footer">
+        <p th:text="#{email.footer.copy}">&copy; 2024 HR Management System. All rights reserved.</p>
+    </div>
+</div>
 </body>
 </html>

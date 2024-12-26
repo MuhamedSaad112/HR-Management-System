@@ -1,5 +1,6 @@
 package com.hrapp.global.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.hrapp.global.config.Constants;
 import com.hrapp.global.entity.Authority;
 import com.hrapp.global.entity.User;
@@ -50,10 +51,12 @@ public class AdminUserDto {
 
 	private String createdBy;
 
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
 	private Instant createdDate;
 
 	private String lastModifiedBy;
 
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "UTC")
 	private Instant lastModifiedDate;
 
 	private Set<String> authorities;

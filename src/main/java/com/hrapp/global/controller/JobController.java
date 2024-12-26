@@ -73,9 +73,7 @@ public class JobController {
         if (dto.getEmployee() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Employee is required");
         }
-        if (dto.getTasks() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tasks is required");
-        }
+
 
         Job job = jobMapper.unMap(dto);
         Job entity = jobService.save(job);
